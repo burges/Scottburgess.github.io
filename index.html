@@ -1,4 +1,4 @@
-# <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -289,6 +289,74 @@
             box-shadow: var(--glow);
             transform: translateY(-3px);
         }
+
+        /* ----- AI COMPETENCY MODULE ----- */
+        .ai-test-container {
+            margin: 2rem auto 0;
+            max-width: 700px;
+            height: 100px; /* Slight bump for readability, still ~3 rows visual weight */
+            background: rgba(0, 10, 20, 0.8);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-left: 3px solid var(--primary);
+            padding: 10px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ai-test-header {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ai-question-text {
+            color: #fff;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            min-height: 2.8em; 
+            margin-bottom: 5px;
+        }
+        
+        .ai-answer-text {
+            color: var(--primary);
+            font-size: 0.85rem;
+            line-height: 1.3;
+            display: none; /* Hidden by default */
+        }
+
+        .ai-controls {
+            display: flex;
+            gap: 15px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            user-select: none;
+            margin-top: auto;
+        }
+
+        .ai-btn {
+            color: var(--primary);
+            transition: all 0.2s;
+        }
+        .ai-btn:hover { text-shadow: 0 0 5px var(--primary); text-decoration: underline; }
+        
+        .ai-btn-pass { color: #00ff64; }
+        .ai-btn-pass:hover { text-shadow: 0 0 5px #00ff64; }
+        
+        .ai-btn-fail { color: #ff2d7b; }
+        .ai-btn-fail:hover { text-shadow: 0 0 5px #ff2d7b; }
+
+        /* Hidden states */
+        .hidden { display: none !important; }
         
         /* Sections */
         section {
@@ -1029,7 +1097,6 @@
         <div class="particle"></div>
     </div>
 
-    
     <nav>
         <ul>
             <li><a href="#home">Home</a></li>
@@ -1041,7 +1108,6 @@
         </ul>
     </nav>
 
-    
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="glitch-wrapper">
@@ -1058,10 +1124,33 @@
             </div>
             <a href="#contact" class="btn btn-primary">Initialize Contact</a>
             <a href="https://www.linkedin.com/in/scott-burgess-30922511" class="btn btn-outline" target="_blank">View LinkedIn →</a>
-        </div>
+
+            <div class="ai-test-container" id="aiTest">
+                <div class="ai-test-header">
+                    <span>// AI Competency Check</span>
+                    <span id="qCount">INIT</span>
+                </div>
+                
+                <div class="ai-question-text" id="aiQuestion">Initializing Neural Pathways...</div>
+                <div class="ai-answer-text" id="aiAnswer"></div>
+
+                <div class="ai-controls" id="ctrlReveal">
+                    <span class="ai-btn" onclick="revealAnswer()">[ DECRYPT ANSWER ]</span>
+                </div>
+
+                <div class="ai-controls hidden" id="ctrlGrade">
+                    <span>Did you know this?</span>
+                    <span class="ai-btn ai-btn-pass" onclick="gradeQuestion(true)">[ YES +1 ]</span>
+                    <span class="ai-btn ai-btn-fail" onclick="gradeQuestion(false)">[ NO +0 ]</span>
+                </div>
+
+                <div class="ai-controls hidden" id="ctrlRetry">
+                    <span class="ai-btn" onclick="startQuiz()">[ RESTART PROTOCOL ]</span>
+                </div>
+            </div>
+            </div>
     </section>
 
-    
     <section id="about">
         <div class="section-header">
             <h2>About Me</h2>
@@ -1114,7 +1203,6 @@
         </div>
     </section>
 
-    
     <section id="expertise">
         <div class="section-header">
             <h2>Areas of Expertise</h2>
@@ -1155,7 +1243,6 @@
         </div>
     </section>
 
-    
     <section id="experience">
         <div class="section-header">
             <h2>Professional Experience</h2>
@@ -1163,7 +1250,6 @@
             <div class="section-line"></div>
         </div>
         <div class="timeline">
-            
             
             <div class="timeline-item current">
                 <div class="timeline-header">
@@ -1200,7 +1286,6 @@
                 </div>
             </div>
             
-            
             <div class="timeline-item">
                 <div class="timeline-header">
                     <div>
@@ -1234,7 +1319,6 @@
                     <span class="tech-tag">Global Delivery</span>
                 </div>
             </div>
-            
             
             <div class="timeline-item">
                 <div class="timeline-header">
@@ -1287,7 +1371,6 @@
                     <span class="tech-tag">Microsoft Partnership</span>
                 </div>
             </div>
-            
             
             <div class="timeline-item">
                 <div class="timeline-header">
@@ -1355,7 +1438,6 @@
                 </div>
             </div>
             
-            
             <div class="timeline-item">
                 <div class="timeline-header">
                     <div>
@@ -1390,7 +1472,6 @@
                 </div>
             </div>
             
-            
             <div class="early-career">
                 <h3>// Earlier Career History</h3>
                 <p>Additional technology leadership roles spanning the foundational years of my career, including positions where I developed deep technical expertise in infrastructure, systems architecture, and emerging technologies during the evolution from mainframe to distributed computing eras.</p>
@@ -1400,7 +1481,6 @@
         </div>
     </section>
 
-    
     <section id="skills">
         <div class="section-header">
             <h2>Technical Expertise</h2>
@@ -1448,7 +1528,6 @@
         </div>
     </section>
 
-    
     <section id="contact">
         <div class="section-header">
             <h2>Let's Connect</h2>
@@ -1468,9 +1547,137 @@
         </div>
     </section>
 
-    
     <footer>
         <p class="footer-text">&copy; 2025 Scott Burgess. <span>35 years of innovation. All systems operational.</span></p>
     </footer>
+
+    <script>
+        // --- AI COMPETENCY LOGIC ---
+        
+        // Full Pool of 35 Hard Technical Questions
+        const questionPool = [
+            { q: "What is the memory bottleneck in LLM inference?", a: "The KV Cache grows linearly with sequence length, causing memory-bound ops." },
+            { q: "Explain 'Catastrophic Forgetting' in Fine-Tuning.", a: "Overwriting prior knowledge when training on new data without replay buffers." },
+            { q: "Define Chinchilla Scaling Laws.", a: "Optimal performance comes from scaling parameters and training tokens equally." },
+            { q: "What is the 'Reversal Curse' in LLMs?", a: "Models trained 'A is B' fail to deduce 'B is A' due to auto-regressive nature." },
+            { q: "Difference between RLHF and RLAIF?", a: "RLHF uses human feedback; RLAIF uses AI feedback for preference modeling." },
+            { q: "Explain 'Speculative Decoding'.", a: "Using a small model to draft tokens and a large model to verify them in parallel." },
+            { q: "What is 'Mode Collapse' in GANs?", a: "When the generator produces limited varieties of output, ignoring the full distribution." },
+            { q: "Why use FlashAttention?", a: "It reduces memory IO by tiling computation in SRAM, avoiding HBM roundtrips." },
+            { q: "What is a 'Mixture of Experts' (MoE)?", a: "A sparse model where only a subset of parameters (experts) are active per token." },
+            { q: "Define 'Zero-Shot Chain of Thought'.", a: "Prompting with 'Let's think step by step' to induce reasoning without examples." },
+            { q: "What is the purpose of LoRA?", a: "Efficient fine-tuning by updating low-rank decomposition matrices instead of full weights." },
+            { q: "Explain 'Temperature' in sampling.", a: "A hyperparameter scaling logits; higher values flatten distribution (randomness), lower sharpen it." },
+            { q: "What is 'DPO' (Direct Preference Optimization)?", a: "Optimizing the policy directly on preference data without training a separate reward model." },
+            { q: "What is the 'Vanishing Gradient' problem?", a: "Gradients become too small during backprop in deep networks, stalling weight updates." },
+            { q: "Define 'PPO' (Proximal Policy Optimization).", a: "A policy gradient method used in RLHF to update policies without large destabilizing steps." },
+            { q: "What is 'Hallucination' in LLMs?", a: "Generating plausible but factually incorrect information not grounded in training data." },
+            { q: "Explain 'Tokenization' issues with numbers.", a: "Numbers are often split into arbitrary sub-tokens, making arithmetic reasoning difficult." },
+            { q: "What is 'Constitutional AI'?", a: "Using a set of principles (constitution) to guide AI feedback and self-correction during training." },
+            { q: "Define 'Grokking' in neural networks.", a: "Sudden generalization after long periods of overfitting during training." },
+            { q: "What is 'In-Context Learning'?", a: "The ability to learn tasks from prompts at inference time without weight updates." },
+            { q: "Explain 'Rotary Positional Embedding' (RoPE).", a: "Encoding position by rotating query/key vectors, allowing better relative position generalization." },
+            { q: "What is 'Quantization' (e.g., 4-bit)?", a: "Reducing precision of weights to save memory, often requiring calibration to maintain accuracy." },
+            { q: "Define 'Bias-Variance Tradeoff'.", a: "Balancing underfitting (high bias) and overfitting (high variance) for optimal generalization." },
+            { q: "What is 'Beam Search'?", a: "A decoding strategy tracking multiple high-probability sequences rather than just the single best next token." },
+            { q: "Explain 'Self-Attention' complexity.", a: "It scales quadratically O(N^2) with sequence length, making long contexts expensive." },
+            { q: "What is 'Retrieval-Augmented Generation' (RAG)?", a: "Injecting external knowledge into the context window to ground model responses." },
+            { q: "Define 'Perplexity'.", a: "A measurement of how well a probability model predicts a sample; lower is better." },
+            { q: "What is 'Instruction Tuning'?", a: "Fine-tuning base models on datasets of (instruction, output) pairs to follow commands." },
+            { q: "Explain 'Gradient Clipping'.", a: "Caping gradients during backprop to prevent exploding gradients and ensure stability." },
+            { q: "What is a 'Transformer's Residual Connection'?", a: "Adding the input of a layer to its output to allow gradient flow through deep networks." },
+            { q: "Define 'Few-Shot Learning'.", a: "Providing a small number of examples in the prompt to guide model performance." },
+            { q: "What is 'Softmax' used for?", a: "Converting raw logits into a probability distribution summing to 1.0." },
+            { q: "Explain 'Top-K Sampling'.", a: "Sampling only from the K most likely next tokens to cut off the low-probability tail." },
+            { q: "What is 'Supervised Fine-Tuning' (SFT)?", a: "Training a pre-trained model on labeled data to adapt it to specific domains/styles." },
+            { q: "Define 'Context Window'.", a: "The maximum number of tokens the model can process in the input/output sequence." }
+        ];
+
+        let activeQuestions = [];
+        let currentIndex = 0;
+        let score = 0;
+
+        const ui = {
+            container: document.getElementById('aiTest'),
+            qCount: document.getElementById('qCount'),
+            question: document.getElementById('aiQuestion'),
+            answer: document.getElementById('aiAnswer'),
+            ctrlReveal: document.getElementById('ctrlReveal'),
+            ctrlGrade: document.getElementById('ctrlGrade'),
+            ctrlRetry: document.getElementById('ctrlRetry')
+        };
+
+        // Fisher-Yates Shuffle to get random subset
+        function getRandomQuestions() {
+            const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, 5);
+        }
+
+        function startQuiz() {
+            activeQuestions = getRandomQuestions();
+            currentIndex = 0;
+            score = 0;
+            
+            // UI Reset
+            ui.container.style.borderColor = "rgba(0, 240, 255, 0.2)";
+            ui.ctrlRetry.classList.add('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = activeQuestions[currentIndex];
+            
+            ui.qCount.innerText = `0${currentIndex + 1}/05`;
+            ui.question.style.display = 'block';
+            ui.question.innerText = `Q: ${q.q}`;
+            
+            ui.answer.innerText = `A: ${q.a}`;
+            ui.answer.style.display = 'none';
+
+            ui.ctrlReveal.classList.remove('hidden');
+            ui.ctrlGrade.classList.add('hidden');
+        }
+
+        function revealAnswer() {
+            ui.answer.style.display = 'block';
+            ui.question.style.display = 'none'; // Swap to keep height consistent
+            
+            ui.ctrlReveal.classList.add('hidden');
+            ui.ctrlGrade.classList.remove('hidden');
+        }
+
+        function gradeQuestion(isCorrect) {
+            if (isCorrect) score++;
+            
+            if (currentIndex < 4) {
+                currentIndex++;
+                loadQuestion();
+            } else {
+                showFinalGrade();
+            }
+        }
+
+        function showFinalGrade() {
+            ui.question.style.display = 'block';
+            ui.answer.style.display = 'none';
+            ui.ctrlGrade.classList.add('hidden');
+            ui.ctrlRetry.classList.remove('hidden');
+            
+            let gradeTitle = "";
+            let color = "";
+            
+            if (score === 5) { gradeTitle = "AGI ACHIEVED (S+)"; color = "#00ff64"; }
+            else if (score === 4) { gradeTitle = "SOTA MODEL (A)"; color = "#00f0ff"; }
+            else if (score === 3) { gradeTitle = "FINE-TUNED (B)"; color = "#7b2dff"; }
+            else { gradeTitle = "BASE MODEL (C)"; color = "#ff2d7b"; }
+
+            ui.question.innerHTML = `ASSESSMENT COMPLETE<br>SCORE: ${score}/5<br><span style="color:${color}; font-weight:bold">${gradeTitle}</span>`;
+            ui.container.style.borderColor = color;
+            ui.qCount.innerText = "DONE";
+        }
+
+        // Initialize
+        window.onload = startQuiz;
+    </script>
 </body>
 </html>
