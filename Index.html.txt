@@ -1,0 +1,1476 @@
+# <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scott Burgess - Technology Executive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --secondary: #7b2dff;
+            --accent: #ff2d7b;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --card-bg: rgba(15, 15, 25, 0.8);
+            --text: #e0e0e0;
+            --text-muted: #888;
+            --glow: 0 0 20px rgba(0, 240, 255, 0.3);
+            --glow-strong: 0 0 40px rgba(0, 240, 255, 0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--darker);
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(123, 45, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 45, 123, 0.05) 0%, transparent 70%),
+                var(--darker);
+        }
+        
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+        
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: float 15s infinite;
+            opacity: 0.5;
+            box-shadow: 0 0 10px var(--primary);
+        }
+        
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 18s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 14s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 16s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 20s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 13s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2s; animation-duration: 17s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 4s; animation-duration: 15s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 1s; animation-duration: 19s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            50% { transform: translateY(-100vh) scale(1); }
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(5, 5, 8, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s;
+            box-shadow: var(--glow);
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+        }
+        
+        .glitch-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.3)); }
+            to { filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.6)); }
+        }
+        
+        .hero .title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+        
+        .typing-effect {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 2px solid var(--primary);
+            white-space: nowrap;
+            animation: typing 3s steps(40) infinite, blink 0.7s step-end infinite;
+        }
+        
+        @keyframes typing {
+            0%, 100% { width: 0; }
+            50%, 90% { width: 100%; }
+        }
+        
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        
+        .hero .company {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+        
+        .badge {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+        
+        .badge:hover {
+            background: rgba(0, 240, 255, 0.2);
+            box-shadow: var(--glow);
+            transform: translateY(-2px);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 0.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--dark);
+            box-shadow: var(--glow);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: var(--glow-strong);
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: var(--glow);
+            transform: translateY(-3px);
+        }
+        
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .section-line {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 1.5rem auto 0;
+            border-radius: 3px;
+            box-shadow: var(--glow);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .profile-img-wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: var(--glow);
+        }
+        
+        .profile-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px dashed rgba(0, 240, 255, 0.3);
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .profile-card h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-card .role {
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 8px 16px;
+            background: rgba(0, 255, 100, 0.1);
+            border: 1px solid rgba(0, 255, 100, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #00ff64;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff64;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 255, 100, 0.7); }
+            50% { opacity: 0.8; box-shadow: 0 0 0 10px rgba(0, 255, 100, 0); }
+        }
+        
+        .about-text {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+        
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 240, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+        
+        /* Expertise Section */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .expertise-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .expertise-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--glow);
+        }
+        
+        .expertise-card:hover::before {
+            opacity: 1;
+        }
+        
+        .expertise-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--glow);
+        }
+        
+        .expertise-card h3 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .expertise-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary), var(--accent));
+            box-shadow: var(--glow);
+        }
+        
+        .timeline-item {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .timeline-item:hover {
+            border-color: var(--primary);
+            box-shadow: var(--glow);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 2.5rem;
+            width: 18px;
+            height: 18px;
+            background: var(--dark);
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            box-shadow: var(--glow);
+        }
+        
+        .timeline-item.current::before {
+            background: var(--primary);
+            animation: pulse 2s infinite;
+        }
+        
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-item h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-item .company-name {
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .company-logo {
+            width: 24px;
+            height: 24px;
+            background: rgba(0, 240, 255, 0.2);
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .timeline-item .date {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--dark);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .timeline-item .location {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .timeline-item .description {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        /* Role Highlights */
+        .role-highlights {
+            margin-top: 1.5rem;
+        }
+        
+        .role-highlights h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .highlights-list {
+            list-style: none;
+        }
+        
+        .highlights-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+        
+        .highlights-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+        
+        /* Tech Stack Tags */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .tech-tag {
+            background: rgba(123, 45, 255, 0.15);
+            color: var(--secondary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid rgba(123, 45, 255, 0.3);
+        }
+        
+        .nested-roles {
+            margin-top: 2rem;
+            padding-left: 1.5rem;
+            border-left: 2px solid rgba(0, 240, 255, 0.2);
+        }
+        
+        .nested-role {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        .nested-role:last-child {
+            border-bottom: none;
+        }
+        
+        .nested-role h4 {
+            color: var(--text);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nested-role .date {
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--primary);
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+        
+        .nested-role .description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+        
+        /* Early Career Notice */
+        .early-career {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            position: relative;
+        }
+        
+        .early-career::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            background: var(--dark);
+            border: 3px solid var(--secondary);
+            border-radius: 50%;
+        }
+        
+        .early-career h3 {
+            color: var(--secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .early-career p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        .early-career .years {
+            display: inline-block;
+            background: rgba(123, 45, 255, 0.15);
+            color: var(--secondary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            margin-top: 1rem;
+            border: 1px solid rgba(123, 45, 255, 0.3);
+        }
+        
+        /* Skills Section */
+        .clouds-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .cloud-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cloud-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+        }
+        
+        .cloud-card.azure { border-top: 3px solid #0078d4; }
+        .cloud-card.aws { border-top: 3px solid #ff9900; }
+        .cloud-card.gcp { border-top: 3px solid #4285f4; }
+        
+        .cloud-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cloud-card h3 {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cloud-card p {
+            color: var(--text-muted);
+        }
+        
+        /* Skills Tags */
+        .skills-container {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .skill-tag {
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--primary);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .skill-tag:hover {
+            background: rgba(0, 240, 255, 0.2);
+            box-shadow: var(--glow);
+            transform: translateY(-2px);
+        }
+        
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 4rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .contact-content p {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 2.5rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 18px 35px;
+            background: transparent;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
+        }
+        
+        .contact-link:hover {
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: var(--glow-strong);
+            transform: translateY(-3px);
+        }
+        
+        .contact-link.linkedin {
+            border-color: #0077b5;
+            color: #0077b5;
+        }
+        
+        .contact-link.linkedin:hover {
+            background: #0077b5;
+            color: #fff;
+            box-shadow: 0 0 30px rgba(0, 119, 181, 0.5);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--darker);
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
+            text-align: center;
+            padding: 2.5rem;
+        }
+        
+        footer p {
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .footer-text span {
+            color: var(--primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .clouds-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .timeline {
+                padding-left: 30px;
+            }
+            
+            .timeline-item::before {
+                left: -30px;
+            }
+            
+            .timeline-header {
+                flex-direction: column;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="glitch-wrapper">
+                <h1>Scott Burgess</h1>
+            </div>
+            <p class="title">
+                <span class="typing-effect">Managing Director & Technology Executive</span>
+            </p>
+            <p class="company">Accenture · 35 Years in Technology</p>
+            <div class="hero-badges">
+                <span class="badge">// Digital Transformation</span>
+                <span class="badge">// Cloud Architecture</span>
+                <span class="badge">// Published Author</span>
+            </div>
+            <a href="#contact" class="btn btn-primary">Initialize Contact</a>
+            <a href="https://www.linkedin.com/in/scott-burgess-30922511" class="btn btn-outline" target="_blank">View LinkedIn →</a>
+        </div>
+    </section>
+
+    
+    <section id="about">
+        <div class="section-header">
+            <h2>About Me</h2>
+            <p>// System.out.print("35 years of technology excellence")</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="about-content">
+            <div class="profile-card">
+                <div class="profile-img-wrapper">
+                    <div class="profile-ring"></div>
+                    <img src="scott.jpg" alt="Scott Burgess" class="profile-img">
+                </div>
+                <h3>Scott Burgess</h3>
+                <p class="role">Technology Executive</p>
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    Available for opportunities
+                </div>
+            </div>
+            <div class="about-text">
+                <p><span class="highlight">Innovative and results-oriented executive</span> with 35 years of experience in technology leadership, global account management, delivery excellence, and digital transformation. As an Accenture Managing Director and Technology Services Lead Executive, I am responsible for client value realization across key northeast resources accounts.</p>
+                
+                <p>I am passionate about <span class="highlight">fostering talent</span>, and have successfully managed large globally diverse teams, driving excellence in solution architecture, implementation, and client satisfaction.</p>
+                
+                <p>With a career spanning more than three decades, I've honed expertise in <span class="highlight">cloud practices, security architecture, and infrastructure</span>, driving significant sales growth and revenue attainment. I've witnessed and led through multiple technology revolutions—from mainframe to client-server, from on-premises to cloud, and now into the AI era.</p>
+                
+                <p>Combining a strong foundation in industrial technology with a forward-thinking approach to emerging trends, I bring a unique perspective to complex technological challenges. I am deeply committed to <span class="highlight">continuous learning and innovation</span>, reflected in my diverse skill set across Microsoft, AWS, and GCP clouds; custom cloud native applications; and multi-cloud architectural models.</p>
+                
+                <p>As a <span class="highlight">published author and industry thought leader</span>, I'm dedicated to sharing insights and driving progress in the ever-evolving technology landscape. I thrive on building collaborative partnerships, driving strategic initiatives, and delivering impactful solutions that drive business growth and exceed client expectations.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">35</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Executive Roles</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Cloud Platforms</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Innovation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="expertise">
+        <div class="section-header">
+            <h2>Areas of Expertise</h2>
+            <p>// Capabilities.load(experienceYears: 35)</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="expertise-grid">
+            <div class="expertise-card">
+                <div class="expertise-icon">🌐</div>
+                <h3>Digital Transformation</h3>
+                <p>Leading enterprise-wide digital initiatives that drive business value, modernize legacy systems, and create competitive advantage through technology innovation</p>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-icon">☁️</div>
+                <h3>Multi-Cloud Architecture</h3>
+                <p>Deep expertise across Microsoft Azure, AWS, and GCP with specialization in cloud-native applications, hybrid deployments, and multi-cloud orchestration strategies</p>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-icon">🔒</div>
+                <h3>Security Architecture</h3>
+                <p>Building robust enterprise security frameworks, implementing zero-trust architectures, and ensuring regulatory compliance across complex technology environments</p>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-icon">📊</div>
+                <h3>Global Account Management</h3>
+                <p>Managing strategic C-level client relationships, driving value realization programs, and orchestrating complex multi-stakeholder engagements across global enterprises</p>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-icon">👥</div>
+                <h3>Executive Leadership</h3>
+                <p>Building and scaling globally diverse high-performance teams, fostering innovation culture, and developing next-generation technology leaders</p>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-icon">📈</div>
+                <h3>Revenue Growth</h3>
+                <p>Proven track record of driving significant sales growth, expanding market presence, and achieving revenue attainment through strategic solution selling</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="experience">
+        <div class="section-header">
+            <h2>Professional Experience</h2>
+            <p>// Career.timeline.render(years: 35)</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="timeline">
+            
+            
+            <div class="timeline-item current">
+                <div class="timeline-header">
+                    <div>
+                        <h3>Managing Director & Technology Services Lead Executive</h3>
+                        <div class="company-name">
+                            <span class="company-logo">A</span> Accenture
+                        </div>
+                        <div class="location">📍 Boston, Massachusetts, United States · On-site</div>
+                    </div>
+                    <span class="date">Apr 2024 - Present</span>
+                </div>
+                <p class="description">
+                    As Managing Director at one of the world's largest professional services companies, I serve as the Technology Services Lead Executive responsible for driving client value realization across key northeast resources accounts. In this role, I lead complex digital transformation initiatives for Fortune 500 clients, orchestrating multi-disciplinary teams to deliver enterprise-scale technology solutions.
+                </p>
+                <div class="role-highlights">
+                    <h4>// Key Responsibilities & Achievements</h4>
+                    <ul class="highlights-list">
+                        <li>Lead technology strategy and delivery excellence for major northeast resources sector accounts, ensuring alignment with client business objectives and Accenture's growth targets</li>
+                        <li>Drive client value realization through innovative technology solutions, measurable business outcomes, and strategic partnership development</li>
+                        <li>Oversee large-scale digital transformation programs encompassing cloud migration, application modernization, and data analytics initiatives</li>
+                        <li>Build and mentor high-performing globally distributed teams, fostering a culture of innovation, collaboration, and continuous improvement</li>
+                        <li>Serve as executive sponsor and trusted advisor to C-suite stakeholders, translating complex technology concepts into business value propositions</li>
+                        <li>Champion emerging technologies including AI/ML, cloud-native architectures, and automation to drive competitive advantage for clients</li>
+                    </ul>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Azure</span>
+                    <span class="tech-tag">AWS</span>
+                    <span class="tech-tag">GCP</span>
+                    <span class="tech-tag">Digital Transformation</span>
+                    <span class="tech-tag">AI/ML</span>
+                    <span class="tech-tag">Enterprise Architecture</span>
+                </div>
+            </div>
+            
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <h3>Vice President</h3>
+                        <div class="company-name">
+                            <span class="company-logo">W</span> Wipro
+                        </div>
+                        <div class="location">📍 Boston, Massachusetts · Full-time</div>
+                    </div>
+                    <span class="date">Jun 2021 - Apr 2024 · 2 yrs 11 mos</span>
+                </div>
+                <p class="description">
+                    Served as Vice President at Wipro, a leading global information technology, consulting, and business process services company. Led strategic client engagements and technology delivery operations across the northeast region, driving significant revenue growth and expanding Wipro's market presence in key industry verticals.
+                </p>
+                <div class="role-highlights">
+                    <h4>// Key Responsibilities & Achievements</h4>
+                    <ul class="highlights-list">
+                        <li>Directed technology services portfolio across multiple Fortune 500 accounts, managing P&L responsibility and driving year-over-year revenue growth</li>
+                        <li>Established and grew strategic partnerships with enterprise clients, expanding engagement scope from initial projects to multi-year transformation programs</li>
+                        <li>Led cross-functional teams spanning solution architecture, delivery management, and client success to ensure exceptional service delivery</li>
+                        <li>Spearheaded cloud transformation initiatives leveraging multi-cloud strategies across Azure, AWS, and GCP platforms</li>
+                        <li>Drove talent development programs, building a pipeline of next-generation technology leaders and fostering an inclusive team culture</li>
+                        <li>Collaborated with global delivery centers to optimize resource allocation, improve delivery efficiency, and maintain competitive pricing models</li>
+                    </ul>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Cloud Migration</span>
+                    <span class="tech-tag">Strategic Planning</span>
+                    <span class="tech-tag">P&L Management</span>
+                    <span class="tech-tag">Client Relations</span>
+                    <span class="tech-tag">Global Delivery</span>
+                </div>
+            </div>
+            
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <h3>Executive Leadership</h3>
+                        <div class="company-name">
+                            <span class="company-logo">Av</span> Avanade
+                        </div>
+                    </div>
+                    <span class="date">Feb 2015 - Jun 2021 · 6 yrs 5 mos</span>
+                </div>
+                <p class="description">
+                    Progressed through executive leadership roles at Avanade, the leading provider of innovative digital, cloud, and advisory services built on the Microsoft ecosystem. Focused on driving innovative holistic cloud solutions, building high-performance teams, and establishing Avanade as a trusted transformation partner for enterprise clients.
+                </p>
+                
+                <div class="nested-roles">
+                    <div class="nested-role">
+                        <h4>Executive Leadership</h4>
+                        <span class="date">Nov 2019 - Jun 2021 · 1 yr 8 mos</span>
+                        <p class="description">
+                            Elevated to executive leadership with expanded responsibilities for strategic account management, practice development, and market expansion. Led initiatives to position Avanade's cloud and digital capabilities in competitive enterprise pursuits.
+                        </p>
+                        <ul class="highlights-list">
+                            <li>Directed strategic growth initiatives across northeast markets, identifying and capturing new business opportunities</li>
+                            <li>Established thought leadership presence through industry speaking engagements, published articles, and client advisory sessions</li>
+                            <li>Mentored and developed senior leaders, building organizational capability and succession pipelines</li>
+                            <li>Drove innovation programs integrating emerging Microsoft technologies into client solution offerings</li>
+                        </ul>
+                    </div>
+                    <div class="nested-role">
+                        <h4>Senior Director Cloud Services</h4>
+                        <span class="date">Feb 2015 - Nov 2019 · 4 yrs 10 mos</span>
+                        <p class="description">
+                            Led Avanade's cloud services practice, driving the adoption of Microsoft Azure and hybrid cloud solutions across enterprise clients. Built and scaled technical teams while establishing delivery methodologies for cloud transformation engagements.
+                        </p>
+                        <ul class="highlights-list">
+                            <li>Built and led cloud services practice from ground up, establishing delivery frameworks, talent pipelines, and go-to-market strategies</li>
+                            <li>Drove significant Azure revenue growth through solution innovation and strategic client partnerships</li>
+                            <li>Developed cloud migration methodologies and assessment frameworks adopted across Avanade's global delivery network</li>
+                            <li>Authored thought leadership content including the article "Before the Move to the Cloud, Businesses Should Understand the Context" establishing expertise in cloud transformation strategy</li>
+                            <li>Collaborated with Microsoft on joint go-to-market initiatives, co-selling programs, and technical enablement</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Microsoft Azure</span>
+                    <span class="tech-tag">Hybrid Cloud</span>
+                    <span class="tech-tag">Practice Leadership</span>
+                    <span class="tech-tag">Thought Leadership</span>
+                    <span class="tech-tag">Microsoft Partnership</span>
+                </div>
+            </div>
+            
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <h3>Director Roles</h3>
+                        <div class="company-name">
+                            <span class="company-logo">E</span> EMC (Dell Technologies)
+                        </div>
+                    </div>
+                    <span class="date">Jan 2006 - Feb 2015 · 9 yrs 2 mos</span>
+                </div>
+                <p class="description">
+                    Held progressive director-level positions at EMC Corporation (now Dell Technologies), a global leader in data storage, information security, virtualization, analytics, and cloud computing. Contributed to EMC's evolution from storage hardware to comprehensive IT solutions and consulting services.
+                </p>
+                
+                <div class="nested-roles">
+                    <div class="nested-role">
+                        <h4>Director Trust Portfolio</h4>
+                        <span class="date">Jan 2013 - Feb 2015 · 2 yrs 2 mos</span>
+                        <p class="description">
+                            Led EMC's Trust Portfolio practice, focusing on security architecture, compliance solutions, and risk management services. Drove strategic initiatives to position EMC as a trusted advisor for enterprise security transformation.
+                        </p>
+                        <ul class="highlights-list">
+                            <li>Directed security architecture and compliance solution portfolio across enterprise accounts</li>
+                            <li>Developed comprehensive security assessment methodologies and risk frameworks</li>
+                            <li>Built strategic partnerships with security vendors and integrated solutions into EMC offerings</li>
+                            <li>Led cross-functional teams delivering security transformation programs for regulated industries</li>
+                        </ul>
+                    </div>
+                    <div class="nested-role">
+                        <h4>Director Office of the CTO, EMC Consulting</h4>
+                        <span class="date">Sep 2009 - Jan 2013 · 3 yrs 5 mos</span>
+                        <p class="description">
+                            Served in EMC Consulting's Office of the CTO, driving technical strategy, solution innovation, and thought leadership initiatives. Collaborated with senior technologists to shape EMC's consulting methodology and technology vision.
+                        </p>
+                        <ul class="highlights-list">
+                            <li>Partnered with CTO organization to define technology strategy and roadmap for consulting services</li>
+                            <li>Led solution architecture initiatives for emerging technologies including virtualization and early cloud platforms</li>
+                            <li>Developed technical enablement programs for consulting teams across global delivery centers</li>
+                            <li>Represented EMC Consulting at industry events, customer advisory boards, and partner forums</li>
+                            <li>Drove innovation programs evaluating and integrating new technologies into service offerings</li>
+                        </ul>
+                    </div>
+                    <div class="nested-role">
+                        <h4>Director East Region</h4>
+                        <span class="date">Jan 2006 - Sep 2009 · 3 yrs 9 mos</span>
+                        <p class="description">
+                            Led EMC Consulting's East Region practice, managing delivery operations, client relationships, and business development across the eastern United States. Built high-performing consulting teams and established regional market presence.
+                        </p>
+                        <ul class="highlights-list">
+                            <li>Managed regional P&L with responsibility for revenue growth, utilization, and profitability targets</li>
+                            <li>Built and scaled consulting team through strategic hiring, training, and retention programs</li>
+                            <li>Established key client relationships across financial services, healthcare, and government sectors</li>
+                            <li>Drove sales growth through solution selling, account expansion, and new logo acquisition</li>
+                            <li>Implemented delivery excellence programs ensuring consistent quality across client engagements</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Security Architecture</span>
+                    <span class="tech-tag">Storage Solutions</span>
+                    <span class="tech-tag">Virtualization</span>
+                    <span class="tech-tag">Consulting</span>
+                    <span class="tech-tag">Regional Leadership</span>
+                </div>
+            </div>
+            
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <h3>Chief Technology Officer</h3>
+                        <div class="company-name">
+                            <span class="company-logo">I</span> Internosis
+                        </div>
+                    </div>
+                    <span class="date">Jan 2001 - Dec 2005 · 5 yrs</span>
+                </div>
+                <p class="description">
+                    Served as Chief Technology Officer at Internosis, a technology consulting and solutions firm. Responsible for defining technology vision, leading solution architecture, building technical teams, and driving innovation across client engagements. This role established foundational executive leadership capabilities during a transformative period in enterprise technology.
+                </p>
+                <div class="role-highlights">
+                    <h4>// Key Responsibilities & Achievements</h4>
+                    <ul class="highlights-list">
+                        <li>Defined and executed company-wide technology strategy, evaluating emerging technologies and determining strategic direction</li>
+                        <li>Led solution architecture for enterprise clients, designing scalable and secure technology implementations</li>
+                        <li>Built and mentored technical teams, establishing engineering best practices and development methodologies</li>
+                        <li>Served as technical executive sponsor for key client accounts, translating business requirements into technology solutions</li>
+                        <li>Drove technology partnerships and vendor relationships to enhance solution capabilities</li>
+                        <li>Established intellectual property and reusable solution components to accelerate delivery and improve margins</li>
+                        <li>Represented company at industry events, building market presence and thought leadership credibility</li>
+                    </ul>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Technology Strategy</span>
+                    <span class="tech-tag">Solution Architecture</span>
+                    <span class="tech-tag">Team Building</span>
+                    <span class="tech-tag">Infrastructure</span>
+                    <span class="tech-tag">Executive Leadership</span>
+                </div>
+            </div>
+            
+            
+            <div class="early-career">
+                <h3>// Earlier Career History</h3>
+                <p>Additional technology leadership roles spanning the foundational years of my career, including positions where I developed deep technical expertise in infrastructure, systems architecture, and emerging technologies during the evolution from mainframe to distributed computing eras.</p>
+                <span class="years">1990 - 2000 · 11 years</span>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <section id="skills">
+        <div class="section-header">
+            <h2>Technical Expertise</h2>
+            <p>// Skills.initialize(multiCloud: true, years: 35)</p>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="clouds-grid">
+            <div class="cloud-card azure">
+                <div class="cloud-icon">🔷</div>
+                <h3>Microsoft Azure</h3>
+                <p>Enterprise cloud solutions, hybrid architectures, and Microsoft ecosystem integration</p>
+            </div>
+            <div class="cloud-card aws">
+                <div class="cloud-icon">🟠</div>
+                <h3>Amazon Web Services</h3>
+                <p>Scalable cloud infrastructure, serverless computing, and data analytics platforms</p>
+            </div>
+            <div class="cloud-card gcp">
+                <div class="cloud-icon">🔵</div>
+                <h3>Google Cloud Platform</h3>
+                <p>Data engineering, machine learning, and Kubernetes-native solutions</p>
+            </div>
+        </div>
+        
+        <div class="skills-container">
+            <div class="skills-tags">
+                <span class="skill-tag">Cloud Native Applications</span>
+                <span class="skill-tag">Multi-Cloud Architecture</span>
+                <span class="skill-tag">Security Architecture</span>
+                <span class="skill-tag">Infrastructure Design</span>
+                <span class="skill-tag">Digital Transformation</span>
+                <span class="skill-tag">Solution Architecture</span>
+                <span class="skill-tag">Global Delivery</span>
+                <span class="skill-tag">Account Management</span>
+                <span class="skill-tag">Team Leadership</span>
+                <span class="skill-tag">Strategic Planning</span>
+                <span class="skill-tag">Client Relations</span>
+                <span class="skill-tag">Revenue Growth</span>
+                <span class="skill-tag">P&L Management</span>
+                <span class="skill-tag">Thought Leadership</span>
+                <span class="skill-tag">Executive Advisory</span>
+                <span class="skill-tag">Talent Development</span>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="contact">
+        <div class="section-header">
+            <h2>Let's Connect</h2>
+            <p>// Connection.establish()</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="contact-content">
+            <p>With 35 years of technology leadership experience, I'm always interested in discussing digital transformation strategies, emerging technologies, and innovative solutions that drive business growth. Let's explore how we can collaborate.</p>
+            <div class="contact-links">
+                <a href="mailto:scott.r.burgess@gmail.com" class="contact-link">
+                    📧 Email Me
+                </a>
+                <a href="https://www.linkedin.com/in/scott-burgess-30922511" class="contact-link linkedin" target="_blank">
+                    💼 LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer>
+        <p class="footer-text">&copy; 2025 Scott Burgess. <span>35 years of innovation. All systems operational.</span></p>
+    </footer>
+</body>
+</html>
